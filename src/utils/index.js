@@ -14,3 +14,7 @@ export const getCookie = (cookieKey) => {
 export const setCookie = (cookieKey, cookieValue) => {
   document.cookie = `${cookieKey}=${cookieValue};`;
 };
+
+export const deleteCookie = (cookieKey) => {
+  document.cookie = `${cookieKey}=;expires = Thu, 01 Jan 1970 00:00:00 GMT`;
+};

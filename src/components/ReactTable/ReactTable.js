@@ -148,7 +148,7 @@ function Table({ columns, data }) {
                 disabled={!canPreviousPage}
                 className="-btn"
               >
-                {"<"}
+                Trang trước
               </button>
             </div>
             <div className="-center">
@@ -248,7 +248,7 @@ function Table({ columns, data }) {
                 disabled={!canNextPage}
                 className="-btn"
               >
-                {">"}
+                Trang sau
               </button>
             </div>
           </div>

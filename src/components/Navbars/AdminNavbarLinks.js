@@ -18,13 +18,16 @@ import Divider from "@material-ui/core/Divider";
 import Person from "@material-ui/icons/Person";
 import Notifications from "@material-ui/icons/Notifications";
 import Dashboard from "@material-ui/icons/Dashboard";
-import Search from "@material-ui/icons/Search";
+// import Search from "@material-ui/icons/Search";
 
 // core components
-import CustomInput from "components/CustomInput/CustomInput.js";
+// import CustomInput from "components/CustomInput/CustomInput.js";
 import Button from "components/CustomButtons/Button.js";
 
 import styles from "assets/jss/material-dashboard-pro-react/components/adminNavbarLinksStyle.js";
+import { useDispatch } from "react-redux";
+import { logOutUser } from "services/Auth/actions";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles(styles);
 
@@ -51,16 +54,23 @@ export default function HeaderLinks(props) {
   const handleCloseProfile = () => {
     setOpenProfile(null);
   };
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const logoutAction = () => dispatch(logOutUser());
+  const handleLogout = () => {
+    logoutAction();
+    history.push("/login");
+  };
   const classes = useStyles();
   const { rtlActive } = props;
-  const searchButton =
-    classes.top +
-    " " +
-    classes.searchButton +
-    " " +
-    classNames({
-      [classes.searchRTL]: rtlActive,
-    });
+  // const searchButton =
+  //   classes.top +
+  //   " " +
+  //   classes.searchButton +
+  //   " " +
+  //   classNames({
+  //     [classes.searchRTL]: rtlActive,
+  //   });
   const dropdownItem = classNames(classes.dropdownItem, classes.primaryHover, {
     [classes.dropdownItemRTL]: rtlActive,
   });
@@ -72,7 +82,7 @@ export default function HeaderLinks(props) {
   });
   return (
     <div className={wrapper}>
-      <CustomInput
+      {/* <CustomInput
         rtlActive={rtlActive}
         formControlProps={{
           className: classes.top + " " + classes.search,
@@ -93,7 +103,7 @@ export default function HeaderLinks(props) {
         className={searchButton}
       >
         <Search className={classes.headerLinksSvg + " " + classes.searchIcon} />
-      </Button>
+      </Button> */}
       <Button
         color="transparent"
         simple
@@ -269,18 +279,15 @@ export default function HeaderLinks(props) {
                     >
                       {rtlActive ? "الملف الشخصي" : "Profile"}
                     </MenuItem>
-                    <MenuItem
+                    {/* <MenuItem
                       onClick={handleCloseProfile}
                       className={dropdownItem}
                     >
                       {rtlActive ? "الإعدادات" : "Settings"}
-                    </MenuItem>
+                    </MenuItem> */}
                     <Divider light />
-                    <MenuItem
-                      onClick={handleCloseProfile}
-                      className={dropdownItem}
-                    >
-                      {rtlActive ? "الخروج" : "Log out"}
+                    <MenuItem onClick={handleLogout} className={dropdownItem}>
+                      {rtlActive ? "الخروج" : "Đăng xuất"}
                     </MenuItem>
                   </MenuList>
                 </ClickAwayListener>

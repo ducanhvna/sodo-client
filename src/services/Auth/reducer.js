@@ -1,5 +1,6 @@
 import { MESS_ALERT } from "const";
 import { COOKIE_KEYS } from "const";
+import { deleteCookie } from "utils";
 import { setCookie } from "utils";
 import { LOGIN_ACTIONS } from "./actions";
 // import httpClient from "../HttpClient";
@@ -38,6 +39,15 @@ export default (state = INIT_STATE, action) => {
         ...state,
         loading: false,
         mess: MESS_ALERT.LOGIN_FAIL,
+      };
+    }
+
+    case LOGIN_ACTIONS.LOG_OUT: {
+      deleteCookie(COOKIE_KEYS.ACCESS_TOKEN);
+      return {
+        ...state,
+        loading: false,
+        authUser: {},
       };
     }
 
