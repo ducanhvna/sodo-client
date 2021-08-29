@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -8,15 +8,15 @@ import { makeStyles } from "@material-ui/core/styles";
 // import AuthNavbar from "components/Navbars/AuthNavbar.js";
 // import Footer from "components/Footer/Footer.js";
 
-import routes from "routes.js";
+import { authRoutes } from "routes.js";
 
 import styles from "assets/jss/material-dashboard-pro-react/layouts/authStyle.js";
 
-import register from "assets/img/register.jpeg";
+// import register from "assets/img/register.jpeg";
 import login from "assets/img/login.jpeg";
-import lock from "assets/img/lock.jpeg";
-import error from "assets/img/clint-mckoy.jpg";
-import pricing from "assets/img/bg-pricing.jpeg";
+// import lock from "assets/img/lock.jpeg";
+// import error from "assets/img/clint-mckoy.jpg";
+// import pricing from "assets/img/bg-pricing.jpeg";
 
 const useStyles = makeStyles(styles);
 
@@ -37,33 +37,27 @@ export default function Pages() {
         return getRoutes(prop.views);
       }
       if (prop.layout === "/auth") {
-        return (
-          <Route
-            path={prop.layout + prop.path}
-            component={prop.component}
-            key={key}
-          />
-        );
+        return <Route path={prop.path} component={prop.component} key={key} />;
       } else {
         return null;
       }
     });
   };
-  const getBgImage = () => {
-    if (window.location.pathname.indexOf("/auth/register-page") !== -1) {
-      return register;
-    } else if (window.location.pathname.indexOf("/auth/login") !== -1) {
-      return login;
-    } else if (window.location.pathname.indexOf("/auth/pricing-page") !== -1) {
-      return pricing;
-    } else if (
-      window.location.pathname.indexOf("/auth/lock-screen-page") !== -1
-    ) {
-      return lock;
-    } else if (window.location.pathname.indexOf("/auth/error-page") !== -1) {
-      return error;
-    }
-  };
+  // const getBgImage = () => {
+  //   if (window.location.pathname.indexOf("/auth/register-page") !== -1) {
+  //     return register;
+  //   } else if (window.location.pathname.indexOf("/login") !== -1) {
+  //     return login;
+  //   } else if (window.location.pathname.indexOf("/auth/pricing-page") !== -1) {
+  //     return pricing;
+  //   } else if (
+  //     window.location.pathname.indexOf("/auth/lock-screen-page") !== -1
+  //   ) {
+  //     return lock;
+  //   } else if (window.location.pathname.indexOf("/auth/error-page") !== -1) {
+  //     return error;
+  //   }
+  // };
   // const getActiveRoute = (routes) => {
   //   let activeRoute = "Default Brand Text";
   //   for (let i = 0; i < routes.length; i++) {
@@ -88,11 +82,11 @@ export default function Pages() {
       <div className={classes.wrapper} ref={wrapper}>
         <div
           className={classes.fullPage}
-          style={{ backgroundImage: "url(" + getBgImage() + ")" }}
+          style={{ backgroundImage: "url(" + login + ")" }}
         >
           <Switch>
-            {getRoutes(routes)}
-            <Redirect from="/auth" to="/auth/login-page" />
+            {getRoutes(authRoutes)}
+            {/* <Redirect from="/auth" to="/auth/login" /> */}
           </Switch>
           {/* <Footer white /> */}
         </div>

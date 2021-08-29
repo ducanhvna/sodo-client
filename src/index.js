@@ -16,22 +16,26 @@
 */
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import AuthLayout from "layouts/Auth.js";
 // import RtlLayout from "layouts/RTL.js";
 import AdminLayout from "layouts/Admin.js";
-
+import PrivateRoutes from "./PrivateRoutes";
 import "assets/scss/material-dashboard-pro-react.scss?v=1.10.0";
+import { Provider } from "react-redux";
+import store from "./services/store";
 
 ReactDOM.render(
   <BrowserRouter>
-    <Switch>
-      {/* <Route path="/rtl" component={RtlLayout} /> */}
-      <Route path="/auth" component={AuthLayout} />
-      <Route path="/admin" component={AdminLayout} />
-      <Redirect from="/" to="/admin/dashboard" />
-    </Switch>
+    <Provider store={store}>
+      <Switch>
+        {/* <Route path="/rtl" component={RtlLayout} /> */}
+        <Route path="/login" component={AuthLayout} />
+        <Route exact path="/" component={AuthLayout} />
+        <PrivateRoutes path="/" component={AdminLayout} />
+      </Switch>
+    </Provider>
   </BrowserRouter>,
   document.getElementById("root")
 );

@@ -10,7 +10,7 @@ import Dashboard from "views/Dashboard/Dashboard.js";
 // import GridSystem from "views/Components/GridSystem.js";
 // import Icons from "views/Components/Icons.js";
 // import LockScreenPage from "views/Pages/LockScreenPage.js";
-// import LoginPage from "views/Auth/Login.js";
+import LoginPage from "views/Auth/Login.js";
 // import Notifications from "views/Components/Notifications.js";
 // import Panels from "views/Components/Panels.js";
 // import PricingPage from "views/Pages/PricingPage.js";
@@ -373,3 +373,23 @@ var dashRoutes = [
   // },
 ];
 export default dashRoutes;
+export const authRoutes = [
+  {
+    path: "/login",
+    name: "Login Page",
+    rtlName: "هعذاتسجيل الدخول",
+    mini: "L",
+    rtlMini: "هعذا",
+    component: LoginPage,
+    layout: "/auth",
+  },
+  {
+    path: "/",
+    name: "Login Page",
+    rtlName: "هعذاتسجيل الدخول",
+    mini: "L",
+    rtlMini: "هعذا",
+    component: LoginPage,
+    layout: "/auth",
+  },
+];
