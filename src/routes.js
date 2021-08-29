@@ -46,7 +46,7 @@ var dashRoutes = [
     rtlName: "لوحة القيادة",
     icon: DashboardIcon,
     component: Dashboard,
-    layout: "/admin",
+    layout: "",
   },
   {
     path: "/work-tasks",
@@ -55,7 +55,7 @@ var dashRoutes = [
     mini: "RT",
     rtlMini: "در",
     component: WorkTasks,
-    layout: "/admin",
+    layout: "",
     icon: DashboardIcon,
   },
   // {

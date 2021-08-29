@@ -122,7 +122,7 @@ export default function Dashboard(props) {
       if (prop.collapse) {
         return getRoutes(prop.views);
       }
-      if (prop.layout === "/admin") {
+      if (prop.layout === "") {
         return <Route path={prop.path} component={prop.component} key={key} />;
       } else {
         return null;
@@ -142,7 +142,7 @@ export default function Dashboard(props) {
     <div className={classes.wrapper}>
       <Sidebar
         routes={routes}
-        logoText={"Creative Tim"}
+        logoText={"Sổ đỏ Online"}
         logo={logo}
         image={image}
         handleDrawerToggle={handleDrawerToggle}
