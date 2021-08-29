@@ -24,7 +24,7 @@ export default (state = INIT_STATE, action) => {
       };
     }
     case LOGIN_ACTIONS.LOGIN_FULFILLED: {
-      const token = action.payload.data.token;
+      const token = action.payload.data.access;
       //   delete httpClient.defaults.headers.common["apikey"];
       //   httpClient.defaults.headers.common["key"] = token;
       setCookie(COOKIE_KEYS.ACCESS_TOKEN, token);

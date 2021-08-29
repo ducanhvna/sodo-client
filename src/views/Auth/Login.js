@@ -29,10 +29,11 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastComponent } from "components/ShowAlert";
 import { toastError } from "components/ShowAlert";
 import { MESS_ALERT } from "const";
+import { VALIDATE_FIELD_MESS } from "const";
 
 const useStyles = makeStyles(styles);
 
-export default function LoginPage() {
+export default function LoginPage(props) {
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   React.useEffect(() => {
     let id = setTimeout(function () {
@@ -52,21 +53,24 @@ export default function LoginPage() {
     console.log(payload);
     await login(payload)
       .then(() => {
-        history.push("/admin/dashboard");
+        history.push("/dashboard");
       })
-      .catch((err) => {
-        console.log("err", err);
+      .catch(() => {
         toastError(MESS_ALERT.LOGIN_FAIL);
       });
   };
   const loginScheme = yup.object().shape({
-    email: yup.string(),
-    password: yup.string(),
+    email: yup
+      .string()
+      .required(VALIDATE_FIELD_MESS.REQUIRED)
+      .email(VALIDATE_FIELD_MESS.EMAIL),
+    password: yup.string().required(VALIDATE_FIELD_MESS.REQUIRED),
   });
   const { register, handleSubmit, control } = useForm({
     mode: "onSubmit",
     resolver: yupResolver(loginScheme),
   });
+  console.log("props", props);
 
   return (
     <div className={classes.container}>

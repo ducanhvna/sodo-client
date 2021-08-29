@@ -11,3 +11,8 @@ export const MESS_ALERT = {
 export const STORE_TITLE = {
   AUTH: "authStore",
 };
+
+export const VALIDATE_FIELD_MESS = {
+  REQUIRED: "Vui lòng không để trống trường này !",
+  EMAIL: "Vui lòng điền đúng định dạng Email !",
+};
