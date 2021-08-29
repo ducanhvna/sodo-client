@@ -53,7 +53,7 @@ function DefaultColumnFilter({
         onChange: (e) => {
           setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
         },
-        placeholder: `Search ${count} records...`,
+        placeholder: `Tìm kiếm ${count} bản ghi...`,
       }}
     />
   );
@@ -148,7 +148,7 @@ function Table({ columns, data }) {
                 disabled={!canPreviousPage}
                 className="-btn"
               >
-                Previous
+                {"<"}
               </button>
             </div>
             <div className="-center">
@@ -189,7 +189,7 @@ function Table({ columns, data }) {
                             }}
                             value={key}
                           >
-                            Page {key + 1}
+                            Trang {key + 1}
                           </MenuItem>
                         );
                       })}
@@ -232,7 +232,7 @@ function Table({ columns, data }) {
                             }}
                             value={prop}
                           >
-                            {prop} rows
+                            {prop} Bản ghi
                           </MenuItem>
                         );
                       })}
@@ -248,7 +248,7 @@ function Table({ columns, data }) {
                 disabled={!canNextPage}
                 className="-btn"
               >
-                Next
+                {">"}
               </button>
             </div>
           </div>
