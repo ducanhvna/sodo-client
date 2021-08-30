@@ -6,7 +6,7 @@ import { COOKIE_KEYS } from "const";
 export default function PrivateRoutes(props) {
   const { component: Component, ...rest } = props;
   const isAuth = getCookie(COOKIE_KEYS.ACCESS_TOKEN);
-  console.log("isAuth", isAuth);
+  // console.log("isAuth", isAuth);
   //TODO: check user login and redirect route
   return (
     <Route

@@ -3,27 +3,28 @@ import { WORK_TASKS_ACTIONS } from "./actions";
 
 const INIT_STATE = {
   loading: false,
-  res: {},
+  res: [],
   mess: "",
 };
 
 export default (state = INIT_STATE, action) => {
   switch (action.type) {
     // get data
-    case WORK_TASKS_ACTIONS.WORK_TASKS_PENDING: {
+    case WORK_TASKS_ACTIONS.GET_WORK_TASKS_PENDING: {
       return {
         ...state,
         loading: true,
       };
     }
-    case WORK_TASKS_ACTIONS.WORK_TASKS_FULFILLED: {
+    case WORK_TASKS_ACTIONS.GET_WORK_TASKS_FULFILLED: {
       return {
         ...state,
         loading: false,
         res: action.payload.data,
+        mess: "",
       };
     }
-    case WORK_TASKS_ACTIONS.WORK_TASKS_REJECTED: {
+    case WORK_TASKS_ACTIONS.GET_WORK_TASKS_REJECTED: {
       return {
         ...state,
         loading: false,

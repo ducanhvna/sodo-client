@@ -13,7 +13,6 @@ const INIT_STATE = {
 };
 
 export default (state = INIT_STATE, action) => {
-  console.log("actions", action);
   switch (action.type) {
     // get data
     case LOGIN_ACTIONS.LOGIN_PENDING: {
@@ -32,6 +31,7 @@ export default (state = INIT_STATE, action) => {
         ...state,
         loading: false,
         authUser: action.payload.data,
+        res: "",
       };
     }
     case LOGIN_ACTIONS.LOGIN_REJECTED: {
