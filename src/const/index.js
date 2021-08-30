@@ -6,10 +6,12 @@ export const COOKIE_KEYS = {
 
 export const MESS_ALERT = {
   LOGIN_FAIL: "Sai tên đăng nhập hoặc mật khẩu !",
+  GET_WORK_LIST_FAIL: "Lỗi trong quá trình lấy dữ liệu !",
 };
 
 export const STORE_TITLE = {
   AUTH: "authStore",
+  WORK_TASKS: "workTasksStore",
 };
 
 export const VALIDATE_FIELD_MESS = {

@@ -1,4 +1,4 @@
-import { httpClient } from "httpClient";
+import httpClient from "httpClient";
 import { AUTH_API_URL } from "./api";
 
 export const LOGIN_ACTIONS = {

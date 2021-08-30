@@ -3,7 +3,7 @@ import { COOKIE_KEYS } from "const";
 import { deleteCookie } from "utils";
 import { setCookie } from "utils";
 import { LOGIN_ACTIONS } from "./actions";
-// import httpClient from "../HttpClient";
+import httpClient from "../../httpClient/index";
 
 const INIT_STATE = {
   loading: false,
@@ -17,7 +17,7 @@ export default (state = INIT_STATE, action) => {
   switch (action.type) {
     // get data
     case LOGIN_ACTIONS.LOGIN_PENDING: {
-      //   delete httpClient.defaults.headers.common["key"];
+      delete httpClient.defaults.headers.common["Authorization"];
       return {
         ...state,
         loading: true,
@@ -25,8 +25,8 @@ export default (state = INIT_STATE, action) => {
     }
     case LOGIN_ACTIONS.LOGIN_FULFILLED: {
       const token = action.payload.data.access;
-      //   delete httpClient.defaults.headers.common["apikey"];
-      //   httpClient.defaults.headers.common["key"] = token;
+      delete httpClient.defaults.headers.common["Authorization"];
+      httpClient.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       setCookie(COOKIE_KEYS.ACCESS_TOKEN, token);
       return {
         ...state,
@@ -44,6 +44,7 @@ export default (state = INIT_STATE, action) => {
 
     case LOGIN_ACTIONS.LOG_OUT: {
       deleteCookie(COOKIE_KEYS.ACCESS_TOKEN);
+      delete httpClient.defaults.headers.common["Authorization"];
       return {
         ...state,
         loading: false,

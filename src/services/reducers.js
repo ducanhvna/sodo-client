@@ -1,9 +1,11 @@
 import { combineReducers } from "redux";
 import authReducers from "./Auth/reducer";
+import workTaskReducers from "./WorkTasks/reducer";
 import { STORE_TITLE } from "../const";
-const { AUTH } = STORE_TITLE;
+const { AUTH, WORK_TASKS } = STORE_TITLE;
 const reducers = {
   [AUTH]: authReducers,
+  [WORK_TASKS]: workTaskReducers,
 };
 
 const reducer = combineReducers(reducers);

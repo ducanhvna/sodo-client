@@ -33,7 +33,7 @@ import { VALIDATE_FIELD_MESS } from "const";
 
 const useStyles = makeStyles(styles);
 
-export default function LoginPage(props) {
+export default function LoginPage() {
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   React.useEffect(() => {
     let id = setTimeout(function () {
@@ -70,7 +70,6 @@ export default function LoginPage(props) {
     mode: "onSubmit",
     resolver: yupResolver(loginScheme),
   });
-  console.log("props", props);
 
   return (
     <div className={classes.container}>
