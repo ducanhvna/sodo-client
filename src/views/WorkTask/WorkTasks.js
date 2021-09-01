@@ -34,28 +34,9 @@ const styles = {
 };
 
 const useStyles = makeStyles(styles);
-const renderTableData = (tasks) => {
-  if (isNullOrEmpty(tasks)) return [];
-  return tasks.map((item, key) => {
-    return {
-      id: key,
-      title: item?.title ?? "",
-      description: item?.description ?? "",
-      created_on: formatTimeDisplay(item?.created_on ?? null),
-      actions: (
-        <div className="actions-right">
-          <Button justIcon round simple color="info">
-            <PlayArrow />
-          </Button>{" "}
-        </div>
-      ),
-    };
-  });
-};
+
 export default function WorkTasks() {
   const classes = useStyles();
-  const [data, setData] = React.useState(renderTableData(data, setData));
-
   const workTasks = getValueStore(STORE_TITLE.WORK_TASKS);
   const dispatch = useDispatch();
   const getWorkTasks = () => dispatch(getWorkTasksActions());
@@ -65,6 +46,32 @@ export default function WorkTasks() {
   }, [dispatch]);
 
   console.log("workTasks", workTasks);
+
+  const renderTableData = (tasks) => {
+    if (isNullOrEmpty(tasks)) return [];
+    return tasks.map((item, key) => {
+      return {
+        id: key,
+        title: item?.title ?? "",
+        description: item?.description ?? "",
+        created_on: formatTimeDisplay(item?.created_on ?? null),
+        actions: (
+          <div className="actions-right">
+            <Button
+              justIcon
+              round
+              color="info"
+              size="medium"
+              className={classes.marginRight}
+            >
+              <PlayArrow />
+            </Button>{" "}
+          </div>
+        ),
+      };
+    });
+  };
+
   return (
     <GridContainer>
       <GridItem xs={12}>

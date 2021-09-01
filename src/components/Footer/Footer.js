@@ -32,11 +32,11 @@ export default function Footer(props) {
   return (
     <footer className={classes.footer}>
       <div className={container}>
-        <div className={classes.left}>
+        {/*<div className={classes.left}>
           <List className={classes.list}>
             <ListItem className={classes.inlineBlock}>
               <a href="#home" className={block}>
-                {rtlActive ? "الصفحة الرئيسية" : "Home"}
+                {rtlActive ? "الصفحة الرئيسية" : "Home1"}
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
@@ -55,19 +55,13 @@ export default function Footer(props) {
               </a>
             </ListItem>
           </List>
-        </div>
+  </div>*/}
         <p className={classes.right}>
           &copy; {1900 + new Date().getYear()}{" "}
-          <a
-            href="https://www.creative-tim.com?ref=mdpr-footer"
-            className={anchor}
-            target="_blank"
-          >
-            {rtlActive ? "توقيت الإبداعية" : "Creative Tim"}
+          <a href="https://hinosoft.com/" className={anchor} target="_blank">
+            {rtlActive ? "توقيت الإبداعية" : "Hinosoft"}
           </a>
-          {rtlActive
-            ? ", مصنوعة مع الحب لشبكة الإنترنت أفضل"
-            : ", made with love for a better web"}
+          {rtlActive ? ", مصنوعة مع الحب لشبكة الإنترنت أفضل" : ""}
         </p>
       </div>
     </footer>

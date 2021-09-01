@@ -28,10 +28,13 @@ import LoginPage from "views/Auth/Login.js";
 // import Widgets from "views/Widgets/Widgets.js";
 // import Wizard from "views/Forms/Wizard.js";
 import WorkTasks from "views/WorkTask/WorkTasks.js";
+// import ImageContent from "views/WorkTask/ImageContent";
 
 // @material-ui/icons
 // import Apps from "@material-ui/icons/Apps";
 import DashboardIcon from "@material-ui/icons/Dashboard";
+import ListAlt from "@material-ui/icons/ListAlt";
+
 // import DateRange from "@material-ui/icons/DateRange";
 // import GridOn from "@material-ui/icons/GridOn";
 // import Image from "@material-ui/icons/Image";
@@ -56,8 +59,20 @@ var dashRoutes = [
     rtlMini: "در",
     component: WorkTasks,
     layout: "",
-    icon: DashboardIcon,
+    icon: ListAlt,
+    exact: true,
   },
+  // {
+  //   path: "image",
+  //   name: "Danh sách công việc1",
+  //   rtlName: "رد فعل الطاولة",
+  //   mini: "RT",
+  //   rtlMini: "در",
+  //   component: ImageContent,
+  //   layout: "",
+  //   icon: ListAlt,
+  //   exact: true,
+  // },
   // {
   //   collapse: true,
   //   name: "Pages",

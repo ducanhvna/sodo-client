@@ -30,7 +30,6 @@ import { ToastComponent } from "components/ShowAlert";
 import { toastError } from "components/ShowAlert";
 import { MESS_ALERT } from "const";
 import { VALIDATE_FIELD_MESS } from "const";
-import { getValueStore } from "utils";
 
 const useStyles = makeStyles(styles);
 
@@ -49,8 +48,6 @@ export default function LoginPage() {
   const history = useHistory();
   const dispatch = useDispatch();
   const login = (payload) => dispatch(loginActions(payload));
-  const fuck = getValueStore("authStore");
-  console.log("fuck", fuck);
 
   const handleLogin = async (payload) => {
     await login(payload)

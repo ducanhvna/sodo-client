@@ -123,7 +123,14 @@ export default function Dashboard(props) {
         return getRoutes(prop.views);
       }
       if (prop.layout === "") {
-        return <Route path={prop.path} component={prop.component} key={key} />;
+        return (
+          <Route
+            path={prop.path}
+            component={prop.component}
+            key={key}
+            exact={prop.exact}
+          />
+        );
       } else {
         return null;
       }
