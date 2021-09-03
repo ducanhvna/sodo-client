@@ -5,9 +5,12 @@ const INIT_STATE = {
   loading: false,
   res: [],
   mess: "",
+  itemUpdate: {},
+  indexItem: 0,
 };
 
 export default (state = INIT_STATE, action) => {
+  console.log("action", action);
   switch (action.type) {
     // get data
     case WORK_TASKS_ACTIONS.GET_WORK_TASKS_PENDING: {
@@ -29,6 +32,27 @@ export default (state = INIT_STATE, action) => {
         ...state,
         loading: false,
         mess: MESS_ALERT.GET_WORK_LIST_FAIL,
+      };
+    }
+    case WORK_TASKS_ACTIONS.SET_ITEM_DATA_TO_MODAL: {
+      return {
+        ...state,
+        loading: false,
+        itemUpdate: action.payload,
+      };
+    }
+    case WORK_TASKS_ACTIONS.RESET_DATA_MODAL: {
+      return {
+        ...state,
+        loading: false,
+        itemUpdate: {},
+      };
+    }
+    case WORK_TASKS_ACTIONS.SET_INDEX_VALUE_MODAL: {
+      return {
+        ...state,
+        loading: false,
+        indexItem: action.payload,
       };
     }
 

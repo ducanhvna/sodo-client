@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -24,6 +24,10 @@ import { OverlayLoading } from "components/Commons/OverlayLoading";
 import { isNullOrEmpty } from "utils";
 import { getValueStore } from "utils";
 import { formatTimeDisplay } from "utils/formats";
+import ModalWorkTasks from "./Modal";
+import { setValueItemToModalActions } from "services/WorkTasks/actions";
+import { resetValueModalActions } from "services/WorkTasks/actions";
+import { setIndexValueModalActions } from "services/WorkTasks/actions";
 
 const styles = {
   cardIconTitle: {
@@ -37,15 +41,30 @@ const useStyles = makeStyles(styles);
 
 export default function WorkTasks() {
   const classes = useStyles();
+  const [isShowModal, setShowModal] = useState(false);
   const workTasks = getValueStore(STORE_TITLE.WORK_TASKS);
   const dispatch = useDispatch();
   const getWorkTasks = () => dispatch(getWorkTasksActions());
+  const setValueModal = (item) => dispatch(setValueItemToModalActions(item));
+  const resetValueModal = () => dispatch(resetValueModalActions());
+  const resetIndexItemUpdate = (index) =>
+    dispatch(setIndexValueModalActions(index));
 
   useEffect(() => {
     getWorkTasks();
   }, [dispatch]);
 
-  console.log("workTasks", workTasks);
+  // console.log("workTasks", workTasks);
+  const handleClickUpdate = (item) => {
+    setShowModal(true);
+    setValueModal(item);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    resetValueModal();
+    resetIndexItemUpdate(0);
+  };
 
   const renderTableData = (tasks) => {
     if (isNullOrEmpty(tasks)) return [];
@@ -61,8 +80,9 @@ export default function WorkTasks() {
               justIcon
               round
               color="info"
-              size="medium"
+              size="sm"
               className={classes.marginRight}
+              onClick={() => handleClickUpdate(item)}
             >
               <PlayArrow />
             </Button>{" "}
@@ -76,6 +96,10 @@ export default function WorkTasks() {
     <GridContainer>
       <GridItem xs={12}>
         <OverlayLoading active={workTasks.loading}>
+          <ModalWorkTasks
+            isShowModal={isShowModal}
+            handleCloseModal={() => handleCloseModal()}
+          />
           <Card>
             <CardHeader color="primary" icon>
               <CardIcon color="primary">
