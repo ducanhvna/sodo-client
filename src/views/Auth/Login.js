@@ -49,8 +49,8 @@ export default function LoginPage() {
   const dispatch = useDispatch();
   const login = (payload) => dispatch(loginActions(payload));
 
-  const handleLogin = async (payload) => {
-    await login(payload)
+  const handleLogin = (payload) => {
+    login(payload)
       .then(() => {
         history.push("/dashboard");
       })

@@ -18,11 +18,6 @@ import TimelineConnector from "@material-ui/lab/TimelineConnector";
 import TimelineContent from "@material-ui/lab/TimelineContent";
 import TimelineDot from "@material-ui/lab/TimelineDot";
 import TimelineOppositeContent from "@material-ui/lab/TimelineOppositeContent";
-// import ImageList from "@material-ui/core/ImageList";
-// import ImageListItem from "@material-ui/core/ImageListItem";
-// import image1 from "../../assets/image/image.png";
-// import image2 from "../../assets/image/image2.png";
-// import ImageListItemBar from "@material-ui/core/ImageListItemBar";
 import {
   Magnifier,
   MOUSE_ACTIVATION,
@@ -32,20 +27,13 @@ import { getValueStore } from "utils";
 import { STORE_TITLE } from "const";
 import { useDispatch } from "react-redux";
 import { setIndexValueModalActions } from "services/WorkTasks/actions";
-// const itemData = [
-//   {
-//     img: image1,
-//     title: "Image",
-//     author: "author",
-//     featured: true,
-//   },
-//   {
-//     img: image2,
-//     title: "Image",
-//     author: "author",
-//     featured: true,
-//   },
-// ];
+import { useForm, Controller } from "react-hook-form";
+import { updateFieldValueActions } from "services/WorkTasks/actions";
+import { toastError, toastSuccess } from "components/ShowAlert";
+import { ToastComponent } from "components/ShowAlert";
+import { isNullOrEmpty } from "utils";
+import { MESS_ALERT } from "const";
+
 const useStyles = makeStyles((theme) => ({
   appBar: {
     position: "relative",
@@ -85,6 +73,9 @@ const useStyles = makeStyles((theme) => ({
   resize: {
     fontSize: 15,
   },
+  input: {
+    height: 40,
+  },
 }));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -94,6 +85,10 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function ModalWorkTasks(props) {
   const dispatch = useDispatch();
   const setIndex = (index) => dispatch(setIndexValueModalActions(index));
+  const updateFieldValue = (id, payload) =>
+    dispatch(updateFieldValueActions(id, payload));
+  const { register, control, getValues } = useForm();
+
   const workTasks = getValueStore(STORE_TITLE.WORK_TASKS);
   const item = workTasks.itemUpdate ?? {};
   const index = workTasks.indexItem ?? 0;
@@ -102,19 +97,57 @@ export default function ModalWorkTasks(props) {
   const podsCurrent = pods ? pods[index] : {};
   const podImages = podsCurrent ? podsCurrent.sodo_images : [];
   const podFormValues = podsCurrent ? podsCurrent.sodo_values : [];
-  console.log("item", item);
-  console.log("item current", podsCurrent);
-  console.log("index", index);
-
   const isDisableBtnNext = pods.length - 1 === index;
   const isDisableBtnPrev = index === 0;
 
+  // const getDefaultFormValue = () => {
+  //   let obj = {};
+  //   podFormValues.forEach((el) => {
+  //     const type = el.type;
+  //     obj[`${type}-${index}`] = "";
+  //   });
+  //   return obj;
+  // };
+
+  const parseFieldFormData = () => {
+    if (isNullOrEmpty(podFormValues)) return [];
+    const results = podFormValues.map((el) => {
+      const type = el.type;
+      return { ...el, [type]: el.text };
+    });
+    return results;
+  };
+
+  const handleCloseModal = () => {
+    props.handleCloseModal();
+  };
+
+  const handleBlurField = (item) => {
+    const formData = getValues();
+    // console.log("blur", formData, item);
+    const type = `${item.type}-${item.id}`;
+    const dataChanged = formData[type];
+    const itemUpdate = { ...item, text: dataChanged };
+    // console.log("updated", itemUpdate);
+    if (!isNullOrEmpty(dataChanged)) {
+      updateFieldValue(item.id, itemUpdate)
+        .then(() => {
+          toastSuccess(MESS_ALERT.UPDATE_WORK_TASKS_SUCCESS);
+        })
+        .catch(() => {
+          toastError(MESS_ALERT.UPDATE_WORK_TASKS_FAIL);
+        });
+    }
+  };
+
+  const fields = parseFieldFormData();
   return (
     <div>
+      <ToastComponent />
       <Dialog
         fullScreen
         open={props.isShowModal}
-        onClose={() => props.handleCloseModal()}
+        onClose={() => handleCloseModal()}
         TransitionComponent={Transition}
       >
         <AppBar className={classes.appBar}>
@@ -145,20 +178,6 @@ export default function ModalWorkTasks(props) {
               disabled={isDisableBtnNext}
             >
               NEXT
-            </Button>
-            <Button
-              autoFocus
-              color="inherit"
-              onClick={() => props.handleCloseModal()}
-            >
-              SKIP
-            </Button>
-            <Button
-              autoFocus
-              color="inherit"
-              onClick={() => props.handleCloseModal()}
-            >
-              SUBMIT
             </Button>
           </Toolbar>
         </AppBar>
@@ -192,7 +211,7 @@ export default function ModalWorkTasks(props) {
               //   alignContent="flex-start"
             >
               <Timeline align="left">
-                {podFormValues.map((el, i) => {
+                {fields.map((el, i) => {
                   return (
                     <TimelineItem key={i}>
                       <TimelineOppositeContent
@@ -206,17 +225,22 @@ export default function ModalWorkTasks(props) {
                         <TimelineConnector />
                       </TimelineSeparator>
                       <TimelineContent>
-                        <TextField
-                          id="outlined-basic"
-                          label={el.display_text}
-                          // variant="outlined"
+                        <p>{el.display_text}</p>
+                        <Controller
+                          control={control}
+                          render={({ field }) => (
+                            <TextField
+                              {...field}
+                              variant="outlined"
+                              onBlur={() => handleBlurField(el)}
+                              // key={el.id}
+                            />
+                          )}
+                          id={`${el.type}-${el.id}`}
+                          name={`${el.type}-${el.id}`}
+                          inputRef={register}
+                          key={el.id}
                           defaultValue={el.text}
-                          // InputProps={{
-                          //   classes: {
-                          //     input: classes.resize,
-                          //   },
-                          //   style: { whiteSpace: "nowrap", top: 0 },
-                          // }}
                         />
                       </TimelineContent>
                     </TimelineItem>

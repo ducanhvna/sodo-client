@@ -48,7 +48,7 @@ function SidebarWrapper({ className, user, headerLinks, links }) {
   });
   return (
     <div className={className} ref={sidebarWrapper}>
-      {user}
+      {/* {user} */}
       {headerLinks}
       {links}
     </div>

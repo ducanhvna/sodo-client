@@ -15,9 +15,9 @@ import Popper from "@material-ui/core/Popper";
 import Divider from "@material-ui/core/Divider";
 
 // @material-ui/icons
-import Person from "@material-ui/icons/Person";
-import Notifications from "@material-ui/icons/Notifications";
-import Dashboard from "@material-ui/icons/Dashboard";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+// import Notifications from "@material-ui/icons/Notifications";
+// import Dashboard from "@material-ui/icons/Dashboard";
 // import Search from "@material-ui/icons/Search";
 
 // core components
@@ -32,17 +32,17 @@ import { useHistory } from "react-router-dom";
 const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
-  const [openNotification, setOpenNotification] = React.useState(null);
-  const handleClickNotification = (event) => {
-    if (openNotification && openNotification.contains(event.target)) {
-      setOpenNotification(null);
-    } else {
-      setOpenNotification(event.currentTarget);
-    }
-  };
-  const handleCloseNotification = () => {
-    setOpenNotification(null);
-  };
+  // const [openNotification, setOpenNotification] = React.useState(null);
+  // const handleClickNotification = (event) => {
+  //   if (openNotification && openNotification.contains(event.target)) {
+  //     setOpenNotification(null);
+  //   } else {
+  //     setOpenNotification(event.currentTarget);
+  //   }
+  // };
+  // const handleCloseNotification = () => {
+  //   setOpenNotification(null);
+  // };
   const [openProfile, setOpenProfile] = React.useState(null);
   const handleClickProfile = (event) => {
     if (openProfile && openProfile.contains(event.target)) {
@@ -104,7 +104,7 @@ export default function HeaderLinks(props) {
       >
         <Search className={classes.headerLinksSvg + " " + classes.searchIcon} />
       </Button> */}
-      <Button
+      {/* <Button
         color="transparent"
         simple
         aria-label="Dashboard"
@@ -126,8 +126,8 @@ export default function HeaderLinks(props) {
             {rtlActive ? "لوحة القيادة" : "Dashboard"}
           </span>
         </Hidden>
-      </Button>
-      <div className={managerClasses}>
+      </Button> */}
+      {/* <div className={managerClasses}>
         <Button
           color="transparent"
           justIcon
@@ -222,7 +222,7 @@ export default function HeaderLinks(props) {
             </Grow>
           )}
         </Popper>
-      </div>
+      </div> */}
 
       <div className={managerClasses}>
         <Button
@@ -231,13 +231,13 @@ export default function HeaderLinks(props) {
           justIcon
           aria-owns={openProfile ? "profile-menu-list" : null}
           aria-haspopup="true"
-          onClick={handleClickProfile}
+          onClick={handleLogout}
           className={rtlActive ? classes.buttonLinkRTL : classes.buttonLink}
           muiClasses={{
             label: rtlActive ? classes.labelRTL : "",
           }}
         >
-          <Person
+          <ExitToAppIcon
             className={
               classes.headerLinksSvg +
               " " +
@@ -273,12 +273,12 @@ export default function HeaderLinks(props) {
               <Paper className={classes.dropdown}>
                 <ClickAwayListener onClickAway={handleCloseProfile}>
                   <MenuList role="menu">
-                    <MenuItem
+                    {/* <MenuItem
                       onClick={handleCloseProfile}
                       className={dropdownItem}
                     >
                       {rtlActive ? "الملف الشخصي" : "Profile"}
-                    </MenuItem>
+                    </MenuItem> */}
                     {/* <MenuItem
                       onClick={handleCloseProfile}
                       className={dropdownItem}

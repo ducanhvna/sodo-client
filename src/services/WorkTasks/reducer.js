@@ -7,10 +7,11 @@ const INIT_STATE = {
   mess: "",
   itemUpdate: {},
   indexItem: 0,
+  messUpdate: "",
 };
 
 export default (state = INIT_STATE, action) => {
-  console.log("action", action);
+  // console.log("action", action);
   switch (action.type) {
     // get data
     case WORK_TASKS_ACTIONS.GET_WORK_TASKS_PENDING: {
@@ -25,6 +26,7 @@ export default (state = INIT_STATE, action) => {
         loading: false,
         res: action.payload.data,
         mess: "",
+        messUpdate: "",
       };
     }
     case WORK_TASKS_ACTIONS.GET_WORK_TASKS_REJECTED: {
@@ -32,6 +34,7 @@ export default (state = INIT_STATE, action) => {
         ...state,
         loading: false,
         mess: MESS_ALERT.GET_WORK_LIST_FAIL,
+        messUpdate: "",
       };
     }
     case WORK_TASKS_ACTIONS.SET_ITEM_DATA_TO_MODAL: {
@@ -39,6 +42,7 @@ export default (state = INIT_STATE, action) => {
         ...state,
         loading: false,
         itemUpdate: action.payload,
+        messUpdate: "",
       };
     }
     case WORK_TASKS_ACTIONS.RESET_DATA_MODAL: {
@@ -46,6 +50,7 @@ export default (state = INIT_STATE, action) => {
         ...state,
         loading: false,
         itemUpdate: {},
+        messUpdate: "",
       };
     }
     case WORK_TASKS_ACTIONS.SET_INDEX_VALUE_MODAL: {
@@ -53,6 +58,30 @@ export default (state = INIT_STATE, action) => {
         ...state,
         loading: false,
         indexItem: action.payload,
+        messUpdate: "",
+      };
+    }
+
+    case WORK_TASKS_ACTIONS.UPDATE_FILED_PENDING: {
+      return {
+        ...state,
+        loading: true,
+        messUpdate: "",
+      };
+    }
+    case WORK_TASKS_ACTIONS.UPDATE_FILED_FULFILLED: {
+      return {
+        ...state,
+        loading: false,
+        mess: "",
+        messUpdate: "",
+      };
+    }
+    case WORK_TASKS_ACTIONS.UPDATE_FILED_REJECTED: {
+      return {
+        ...state,
+        loading: false,
+        messUpdate: MESS_ALERT.UPDATE_WORK_TASKS_FAIL,
       };
     }
 

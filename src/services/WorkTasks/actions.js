@@ -10,6 +10,11 @@ export const WORK_TASKS_ACTIONS = {
   SET_ITEM_DATA_TO_MODAL: "SET_ITEM_DATA_TO_MODAL",
   RESET_DATA_MODAL: "RESET_DATA_MODAL",
   SET_INDEX_VALUE_MODAL: "SET_INDEX_VALUE_MODAL",
+
+  UPDATE_FILED: "UPDATE_FILED",
+  UPDATE_FILED_PENDING: "UPDATE_FILED_PENDING",
+  UPDATE_FILED_FULFILLED: "UPDATE_FILED_FULFILLED",
+  UPDATE_FILED_REJECTED: "UPDATE_FILED_REJECTED",
 };
 
 // export const getWorkTasksActions = () => ({
@@ -41,5 +46,15 @@ export const setIndexValueModalActions = (index) => (dispatch) => {
   return dispatch({
     type: WORK_TASKS_ACTIONS.SET_INDEX_VALUE_MODAL,
     payload: index,
+  });
+};
+
+export const updateFieldValueActions = (id, payload) => (dispatch) => {
+  return dispatch({
+    type: WORK_TASKS_ACTIONS.UPDATE_FILED,
+    payload: httpClient.put(
+      `${WORK_TASKS_API_URL.UPDATE_FIELD}/${id}/`,
+      payload
+    ),
   });
 };

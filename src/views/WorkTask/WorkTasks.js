@@ -64,11 +64,26 @@ export default function WorkTasks() {
     setShowModal(false);
     resetValueModal();
     resetIndexItemUpdate(0);
+    getWorkTasks();
+  };
+
+  const checkActiveBtnStart = (item) => {
+    const pods = item?.pod_sodos ?? [];
+    if (!isNullOrEmpty(pods)) {
+      const hadImagePods = pods.every((el) => {
+        return !isNullOrEmpty(el.sodo_images);
+      });
+      return hadImagePods;
+    } else {
+      return false;
+    }
   };
 
   const renderTableData = (tasks) => {
     if (isNullOrEmpty(tasks)) return [];
     return tasks.map((item, key) => {
+      const isEnableBtnStart = checkActiveBtnStart(item);
+      // console.log("isEnableBtnStart", isEnableBtnStart);
       return {
         id: key,
         title: item?.title ?? "",
@@ -79,10 +94,11 @@ export default function WorkTasks() {
             <Button
               justIcon
               round
-              color="info"
+              color={isEnableBtnStart ? "info" : "secondary"}
               size="sm"
               className={classes.marginRight}
               onClick={() => handleClickUpdate(item)}
+              disabled={!isEnableBtnStart}
             >
               <PlayArrow />
             </Button>{" "}

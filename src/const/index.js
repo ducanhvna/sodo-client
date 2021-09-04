@@ -7,6 +7,8 @@ export const COOKIE_KEYS = {
 export const MESS_ALERT = {
   LOGIN_FAIL: "Sai tên đăng nhập hoặc mật khẩu !",
   GET_WORK_LIST_FAIL: "Lỗi trong quá trình lấy dữ liệu !",
+  UPDATE_WORK_TASKS_FAIL: "Cập nhật dữ liệu thất bại !",
+  UPDATE_WORK_TASKS_SUCCESS: "Cập nhật dữ liệu thành công !",
 };
 
 export const STORE_TITLE = {
