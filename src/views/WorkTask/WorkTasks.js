@@ -94,7 +94,7 @@ export default function WorkTasks() {
             <Button
               justIcon
               round
-              color={isEnableBtnStart ? "info" : "secondary"}
+              color={isEnableBtnStart ? "info" : "warning"}
               size="sm"
               className={classes.marginRight}
               onClick={() => handleClickUpdate(item)}

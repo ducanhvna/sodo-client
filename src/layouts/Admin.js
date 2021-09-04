@@ -173,7 +173,7 @@ export default function Dashboard(props) {
             <div className={classes.container}>
               <Switch>
                 {getRoutes(routes)}
-                <Redirect from="/admin" to="/admin/dashboard" />
+                <Redirect from="/" to="/dashboard" />
               </Switch>
             </div>
           </div>
@@ -181,7 +181,7 @@ export default function Dashboard(props) {
           <div className={classes.map}>
             <Switch>
               {getRoutes(routes)}
-              <Redirect from="/admin" to="/admin/dashboard" />
+              <Redirect from="/" to="/dashboard" />
             </Switch>
           </div>
         )}

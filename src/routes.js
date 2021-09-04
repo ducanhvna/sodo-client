@@ -1,7 +1,7 @@
 // import Buttons from "views/Components/Buttons.js";
 // import Calendar from "views/Calendar/Calendar.js";
 // import Charts from "views/Charts/Charts.js";
-import Dashboard from "views/Dashboard/Dashboard.js";
+// import Dashboard from "views/Dashboard/Dashboard.js";
 // import ErrorPage from "views/Pages/ErrorPage.js";
 // import ExtendedForms from "views/Forms/ExtendedForms.js";
 // import ExtendedTables from "views/Tables/ExtendedTables.js";
@@ -32,7 +32,7 @@ import WorkTasks from "views/WorkTask/WorkTasks.js";
 
 // @material-ui/icons
 // import Apps from "@material-ui/icons/Apps";
-import DashboardIcon from "@material-ui/icons/Dashboard";
+// import DashboardIcon from "@material-ui/icons/Dashboard";
 import ListAlt from "@material-ui/icons/ListAlt";
 
 // import DateRange from "@material-ui/icons/DateRange";
@@ -43,16 +43,16 @@ import ListAlt from "@material-ui/icons/ListAlt";
 // import WidgetsIcon from "@material-ui/icons/Widgets";
 
 var dashRoutes = [
+  // {
+  //   path: "/dashboard",
+  //   name: "Home",
+  //   rtlName: "لوحة القيادة",
+  //   icon: DashboardIcon,
+  //   component: Dashboard,
+  //   layout: "",
+  // },
   {
     path: "/dashboard",
-    name: "Home",
-    rtlName: "لوحة القيادة",
-    icon: DashboardIcon,
-    component: Dashboard,
-    layout: "",
-  },
-  {
-    path: "/work-tasks",
     name: "Danh sách công việc",
     rtlName: "رد فعل الطاولة",
     mini: "RT",

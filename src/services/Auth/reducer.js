@@ -1,9 +1,10 @@
 import { MESS_ALERT } from "const";
 import { COOKIE_KEYS } from "const";
-import { deleteCookie } from "utils";
 import { setCookie } from "utils";
 import { LOGIN_ACTIONS } from "./actions";
 import httpClient from "../../httpClient/index";
+import { deleteAllCookies } from "utils";
+import { setExpiredDateToken } from "utils";
 
 const INIT_STATE = {
   loading: false,
@@ -27,6 +28,7 @@ export default (state = INIT_STATE, action) => {
       delete httpClient.defaults.headers.common["Authorization"];
       httpClient.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       setCookie(COOKIE_KEYS.ACCESS_TOKEN, token);
+      setCookie(COOKIE_KEYS.TOKEN_EXPIRED_DATE, setExpiredDateToken());
       return {
         ...state,
         loading: false,
@@ -43,7 +45,7 @@ export default (state = INIT_STATE, action) => {
     }
 
     case LOGIN_ACTIONS.LOG_OUT: {
-      deleteCookie(COOKIE_KEYS.ACCESS_TOKEN);
+      deleteAllCookies();
       delete httpClient.defaults.headers.common["Authorization"];
       return {
         ...state,

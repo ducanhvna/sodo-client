@@ -183,7 +183,7 @@ export default function ModalWorkTasks(props) {
         </AppBar>
         <Divider />
         <Grid container spacing={2}>
-          <Grid item xs={9}>
+          <Grid item xs={8} md={9} lg={9}>
             <Paper
               className={classes.paper}
               style={{ height: "94vh", overflow: "scroll" }}
@@ -204,7 +204,7 @@ export default function ModalWorkTasks(props) {
               </div>
             </Paper>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={4} md={3} lg={3}>
             <Paper
               className={classes.paper}
               style={{ height: "94vh", overflow: "scroll" }}

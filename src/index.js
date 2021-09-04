@@ -32,7 +32,7 @@ ReactDOM.render(
       <Switch>
         {/* <Route path="/rtl" component={RtlLayout} /> */}
         <Route path="/login" component={AuthLayout} />
-        <Route exact path="/" component={AuthLayout} />
+        {/* <Route exact path="/" component={AuthLayout} /> */}
         <PrivateRoutes path="/" component={AdminLayout} />
       </Switch>
     </Provider>

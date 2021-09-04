@@ -1,3 +1,4 @@
+import { EXPIRED_DATE_TOKEN } from "const";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
@@ -21,6 +22,17 @@ export const setCookie = (cookieKey, cookieValue) => {
 export const deleteCookie = (cookieKey) => {
   document.cookie = `${cookieKey}=;expires = Thu, 01 Jan 1970 00:00:00 GMT`;
 };
+
+export function deleteAllCookies() {
+  var cookies = document.cookie.split(";");
+
+  for (var i = 0; i < cookies.length; i++) {
+    var cookie = cookies[i];
+    var eqPos = cookie.indexOf("=");
+    var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+  }
+}
 
 export function dispatchActions() {
   const dispatch = useDispatch();
@@ -61,4 +73,10 @@ export const isNullOrEmpty = (data) => {
     }
   }
   return result;
+};
+
+export const setExpiredDateToken = () => {
+  const now = new Date();
+  now.setDate(now.getDate() + EXPIRED_DATE_TOKEN);
+  return now;
 };

@@ -1,7 +1,9 @@
 export const HOST = "https://sodolive.herokuapp.com/api";
 export const TIME_OUT = 20000;
+export const EXPIRED_DATE_TOKEN = 30;
 export const COOKIE_KEYS = {
   ACCESS_TOKEN: "token",
+  TOKEN_EXPIRED_DATE: "token_expired_date",
 };
 
 export const MESS_ALERT = {
